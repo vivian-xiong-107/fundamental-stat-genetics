@@ -727,13 +727,72 @@ and
 $$
 Var(X) = 4p_{AA} + p_{Aa} - 4p^2
 $$
-
+If we substitute formulas 3.3 for genotype frequencies under HWE into formulas (3.4) and (3.5), we find $\mathbb{E}(X) = 2p$ and $Var(X) = 2pq$, as expected. We now use the general formulas (3.4) and (3.5) to show what happens when we have population stratification and inbreeding. Calculations for admixture are similar and will not be shown here.
+\begin{itemize}
+    \item \textbf{\textcolor{NavyBlue}{Population Stratification: }}Assume a population with K strata, with allele frequencies $p_k$, and strata frequencies $s_k$, for $k = 1\cdot sk$. Table 3.4 gives the genotype frequencies assuming HWE holds in each strata.
+\end{itemize}
+By definition, the allele frequency in the total population is
+$$
+p = \sum^K_{k=1} s_k p_k
+$$
+and 
+$$
+P(X=1) = 2\sum^K_{k=1} s_k p_k q_k = 2\sum^K_{k=1}s_k p_k (1-p_k) = 2p - 2\mathbb{E}(p_k^2) + 2p^2 - 2p^2 = 2pq - 2 Var(p_k)
+$$
+\begin{center}
+\includegraphics[scale=0.5]{table3.png}
+\end{center}
+In a similar matter, using formula (3.5), we find that
+$$
+Var(X) = 2pq + 2 Var(p_k)
+$$
+Thus with a stratified population, $Var(X)$ is inflated relative to the binomial variance, and the frequency of heterozygotes $P(X = 1)$ is reduced relative to a population in HWE. When $Var(p_k) = 0$, the allele frequencies do not vary over strata, and there is no variance inflation.
+\begin{itemize}
+    \item \textcolor{NavyBlue}{Population Inbreeding: }With inbreeding, there is a positive probability that an individual inherits the exact same $A$ (or $a$) allele from both parents, meaning the parents have a common ancestor. Since the inbreeding coefficient, $F$, is defined as the probability that a randomly sampled individual will inherit the same copy from both parents, with inbreeding, we have
+\end{itemize}
+$$
+\mathcal{P}(AA) = \mathcal{P}(X=2) = F_p+ (1-F)p^2
+$$
+$$
+\mathcal{P}(Aa) = \mathcal{P}(X=1) = 2pq(1-F)
+$$
+$$
+\mathcal{P}(aa) = \mathcal{P}(X=0) = F_q+ (1-F)q^2
+$$
+Note that $\mathbb{E}(X)=2p$, but there is a deficit of heterozygotes relative to HWE because $(1-F)$ is less than one, and further,
+$$
+Var(X) = 4[F_p+(1-F)p^2]+2pq (1-F)-4q^2 = 2pq(1+F)
+$$
+is inflated relative to the variance of a HWE population. This deficit of heterozygotes (Loss of Heterozygocity (LOH)) due to population substructure (stratification, admixture and/or inbreeding) is known as the Wahlund effect. For statistical tests or models that assume HWE in their variance calculations, the Wahlund effect can lead to bias and incorrect inference.
 \subsubsection{Measuring the Departure from HWE}
-
-
-
-
-
+We have seen that the observed number of heterozygotes tends to be too small by a factor of $(1-F)$ with inbreeding. Under the simple inbreeding model for $\mathcal{P}(Aa)$ given in formula (3.7), an estimate of the inbreeding coefficient is given by
+$$
+\hat{F}= 1-O/E
+$$
+where $O$ is the observed number of heterozygotes, and $E$ is the expected number of heterozygotes calculated for the test of HWE. With inbreeding, $\hat{F}$should be positive since we expect to observe fewer $O$ than $E$. For the simple model of population stratification given above, $\hat{F}$ also can be shown to estimate the correlation between maternal and paternal alleles induced by population stratification
+\begin{shaded*}
+\noindent \textbf{Box 3.5 Estimation of the Inbreeding Coefficient}
+\newline
+\newline
+The coefficient of inbreeding can be estimated from observed genotype frequencies in a sample to describe the degree of inbreeding and/or population stratification and admixture in a population. We consider two samples from Table 3.1:
+\begin{center}
+\centering
+\begin{tabularx}{1.0\textwidth} { 
+  | >{\centeringt\arraybackslash}X 
+   >{\centering\arraybackslash}X
+   >{\centering\arraybackslash}X
+   >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X | }
+\hline
+Bassett Hound & $O=2$ & $E=32 \cdot 2(0.98)(0.02)$ & $\hat{F}=0.51$  \\
+Tibetan Terriers & $O=10$ & $E=24 \cdot 2(0.64)(0.36)$ & $\hat{F}=0.096$ \\
+\hline
+\end{tabularx}
+\end{center}
+Note that the $F$ allele has disappeared from the Basenji breed, at least in the sample reported in Table 3.1.
+\end{shaded*}
 
 
 
